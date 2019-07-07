@@ -22,6 +22,7 @@ app.mount('/static', StaticFiles(directory='app/static'))
 
 data = ImageDataBunch.single_from_classes('', classes, ds_tfms=get_transforms(), size=224).normalize(imagenet_stats)
 learn = create_cnn(data, models.resnet34)
+print(path.as_posix())
 # learn.load('gokul-sentiment-stage-5n')
 learn.load('stage-1')
 
