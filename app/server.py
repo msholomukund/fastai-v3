@@ -21,7 +21,7 @@ app.mount('/static', StaticFiles(directory='app/static'))
 
 
 data = ImageDataBunch.single_from_classes('', classes, ds_tfms=get_transforms(), size=224).normalize(imagenet_stats)
-learn = create_cnn(data, models.resnet34)
+# learn = create_cnn(data, models.resnet34)
 print(path.as_posix())
 # learn.load('gokul-sentiment-stage-5n')
 learn.load('stage-1')
@@ -67,8 +67,9 @@ async def analyze(request):
     img_data = await request.form()
     img_bytes = await (img_data['file'].read())
     img = open_image(BytesIO(img_bytes))
-    prediction = learn.predict(img)[0]
-    return JSONResponse({'result': str(prediction)})
+    # prediction = learn.predict(img)[0]
+    # return JSONResponse({'result': str(prediction)})
+    return JSONResponse({'result': str(path.as_posix())})
 
 
 if __name__ == '__main__':
