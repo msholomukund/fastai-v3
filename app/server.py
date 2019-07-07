@@ -20,6 +20,11 @@ app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Reques
 app.mount('/static', StaticFiles(directory='app/static'))
 
 
+data = ImageDataBunch.single_from_classes('', classes, ds_tfms=get_transforms(), size=224).normalize(imagenet_stats)
+learner = create_cnn(data, models.resnet34)
+learner.load('gokul-sentiment-stage-5n')
+
+
 async def download_file(url, dest):
     if dest.exists(): return
     async with aiohttp.ClientSession() as session:
