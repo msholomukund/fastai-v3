@@ -24,7 +24,7 @@ data = ImageDataBunch.single_from_classes('', classes, ds_tfms=get_transforms(),
 learn = create_cnn(data, models.resnet34)
 print(path.as_posix())
 # learn.load('gokul-sentiment-stage-5n')
-# learn.load('stage-1')
+learn.load('/app/models/stage-1')
 
 
 async def download_file(url, dest):
@@ -68,8 +68,8 @@ async def analyze(request):
     img_bytes = await (img_data['file'].read())
     img = open_image(BytesIO(img_bytes))
     # prediction = learn.predict(img)[0]
-    # return JSONResponse({'result': str(prediction)})
-    return JSONResponse({'result': str(path.as_posix())})
+    return JSONResponse({'result': str(prediction)})
+    # return JSONResponse({'result': str(path.as_posix())})
 
 
 if __name__ == '__main__':
